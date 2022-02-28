@@ -84,7 +84,12 @@ public class Menu {
                     }
                 } else if (c1 == 2) {
                     System.out.println("Product list:\n");
-                    // SELECT ProductName, Quantity, Price FROM Stocking;
+                    String s = "select product, price, qty FROM Stockings";
+                    ResultSet rs = stmt.executeQuery(s);
+                    System.out.println("Product name\tPrice\tQuantity\n");
+                    while(rs.next())
+                        System.out.println(rs.getString(1)+"\t"+rs.getFloat(2)+"\t"+rs.getInt(3));
+                    
                     do {
                         System.out.println("Enter the name of the product: ");
                         name = sc.nextLine();
