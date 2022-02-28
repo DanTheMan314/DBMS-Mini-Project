@@ -14,6 +14,7 @@ public class Menu {
             // step3 create the statement object
             Statement stmt = con.createStatement();
             PreparedStatement ps = null;
+
             Scanner sc = new Scanner(System.in);
             String name;
             int pid, Qty;
@@ -36,7 +37,9 @@ public class Menu {
                             price = sc.nextFloat();
                             System.out.println("Quantity: ");
                             Qty = sc.nextInt();
-                            // INSERT INTO Stocking VALUES(pid,name,qty,price);
+                            String s = "insert into stockings values("+pid+",'"+name+"',"+price+","+Qty+")";
+                            ps = con.prepareStatement(s);
+                            ps.execute();
                             break;
                         case 2:
                             System.out.println("Product list:\n");
