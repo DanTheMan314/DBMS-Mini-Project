@@ -44,18 +44,27 @@ public class Menu {
                             ps.execute();
                             break;
                         case 2:
-                            System.out.println("Product list:\n");
-                            // SELECT ProductName, Quantity, Price FROM Stocking;
+                        System.out.println("Product list:\n");
+                        s = "select product, price, qty FROM Stockings";
+                        ResultSet rs = stmt.executeQuery(s);
+                        System.out.println("Product name\tPrice\tQuantity\n");
+                        while(rs.next())
+                            System.out.println(rs.getString(1)+"\t"+rs.getFloat(2)+"\t"+rs.getInt(3));
                             System.out.println("Enter the name and id of the product to be updated: ");
                             name = sc.nextLine();
                             pid = sc.nextInt();
                             System.out.println("Quantity: ");
                             Qty = sc.nextInt();
-                            // UPDATE Stocking SET Quantity = Qty WHERE ProductID == pid;
+                            s = "update stockings set qty = "+Qty+" WHERE pid = "+pid;
+                            rs = stmt.executeQuery(s);
                             break;
-                        case 3:
+                            case 3:
                             System.out.println("Product list:\n");
-                            // SELECT ProductName, Quantity, Price FROM Stocking;
+                            s = "select product, price, qty FROM Stockings";
+                            rs = stmt.executeQuery(s);
+                            System.out.println("Product name\tPrice\tQuantity\n");
+                            while(rs.next())
+                                System.out.println(rs.getString(1)+"\t"+rs.getFloat(2)+"\t"+rs.getInt(3));
                             System.out.println("Enter the name and id of the product on sale: ");
                             name = sc.nextLine();
                             pid = sc.nextInt();
@@ -93,19 +102,22 @@ public class Menu {
                     do {
                         System.out.println("Enter the name of the product: ");
                         name = sc.nextLine();
+                        name = sc.nextLine();
                         System.out.println("Quantity to be bought: ");
                         Qty = sc.nextInt();
-                        s = "select qty from Stockings where product = '"+name+"'";
+                        s = "select qty,price from Stockings where product = '"+name+"'";
                         rs = stmt.executeQuery(s);
+                        rs.next();
                         int Quantity = rs.getInt(1);
                         if(Qty>Quantity)
                             System.out.println("Exceeded quantity in stock!");
                         System.out.println("Do you want to order more products: ");
                         ch = sc.next().charAt(0);
-                        // get price again
+                        price = rs.getFloat(2);
                         Tot_Price += price * Qty;
                         System.out.println("Total price: " + Tot_Price);
                     } while (ch == 'y');
+                    
                     // Set the date of closing as sysdate + random number
                 }
                 System.out.println("Do you want to continue: ");
