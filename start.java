@@ -17,13 +17,16 @@ class Start
             Statement stmt = con.createStatement();
 
             // step4 execute query
-            ResultSet rs = stmt.executeQuery("select * from emp");
+            ResultSet rs = stmt.executeQuery("create table stockings( pid number primary key"
+            +", product varchar(20), price number, qty number);");
             while (rs.next())
-                System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3));
-
+            System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3));
+            
+            stmt.executeQuery("drop table orders;");
+            stmt.executeQuery("drop table stockings;");
             // step5 close the connection object
             con.close();
-
+            
         } 
         catch (Exception e) 
         {
