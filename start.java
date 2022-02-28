@@ -15,17 +15,26 @@ class Start
 
             // step3 create the statement object
             Statement stmt = con.createStatement();
-
+            PreparedStatement ps = null;
             // step4 execute query
-            stmt.executeQuery("create table stockings( pid number primary key"
+            ResultSet Stockings = stmt.executeQuery("create table stockings( pid number primary key"
             +", product varchar(20), price number, qty number)");
-            stmt.executeQuery("CREATE TABLE ORDERS (Oid number PRIMARY KEY, Prodid NUMBER"
-            +",FOREIGN KEY (Prodid) REFERENCES Stockings(Pid), qty number, dateofclosing date)");
-            //while (rs.next())
-            //System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3));
-            
-            stmt.executeQuery("drop table orders");
-            stmt.executeQuery("drop table stockings");
+            //ResultSet Orders = stmt.executeQuery("CREATE TABLE ORDERS (Oid number PRIMARY KEY, Prodid"
+            //+ " NUMBER,FOREIGN KEY (Prodid) REFERENCES Stockings(Pid), qty number, dateofclosing date)");
+            String s = "insert into stockings values(121,'cold coffee',88,10)";
+            ps = con.prepareStatement(s);
+            ps.execute();
+            s = "insert into stockings values(122,'doughnut',120,20)";
+            //stmt.executeQuery("insert into orders values(1,121,5,to_date('28-02-2022','DD-MM-YYYY'))");
+            //stmt.executeQuery("insert into orders values(2,122,13,to_date('28-02-2022','DD-MM-YYYY'))");
+            ResultSet rsSt = stmt.executeQuery("select * from stockings");
+            //ResultSet rsOr = stmt.executeQuery("select * from orders");
+            while (rsSt.next())
+            {System.out.println(rsSt.getInt(1) + "  " + rsSt.getString(2) + "  Rs." + rsSt.getInt(3)+" x "+rsSt.getInt(4));}
+            s = "drop table stockings";
+            ps = con.prepareStatement(s);
+            boolean result = ps.execute();
+            //stmt.executeQuery("drop table stockings");
             // step5 close the connection object
             con.close();
             
