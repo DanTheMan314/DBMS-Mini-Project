@@ -16,7 +16,8 @@ public class Menu {
             PreparedStatement ps = null;
 
             Scanner sc = new Scanner(System.in);
-            char name[];
+            String name;
+            char array[] = new char[20];
             int pid, Qty;
             char ch = 'y';
             float price = 0, Tot_Price = 0;
@@ -30,7 +31,8 @@ public class Menu {
                     switch (c2) {
                         case 1:
                             System.out.println("Enter the product details:\nProduct name: ");
-                            name = sc.next().toCharArray();
+                            name = sc.nextLine();
+                            name = sc.nextLine();
                             System.out.println("Product id: ");
                             pid = sc.nextInt();
                             System.out.println("Price: ");
