@@ -17,7 +17,6 @@ public class Menu {
 
             Scanner sc = new Scanner(System.in);
             String name;
-            char array[] = new char[20];
             int pid, Qty;
             char ch = 'y';
             float price = 0, Tot_Price = 0;
@@ -28,10 +27,11 @@ public class Menu {
                     System.out.print(
                             "Admin functions:\n1.Add a new product\n2.Update inventory\n3.Change price\n4.Delete a product\n5.View all orders for a certain product\nEnter choice: ");
                     int c2 = sc.nextInt();
+                    name = sc.nextLine();
                     switch (c2) {
                         case 1:
                             System.out.println("Enter the product details:\nProduct name: ");
-                            name = sc.nextLine();
+                            
                             name = sc.nextLine();
                             System.out.println("Product id: ");
                             pid = sc.nextInt();
@@ -95,13 +95,11 @@ public class Menu {
                         name = sc.nextLine();
                         System.out.println("Quantity to be bought: ");
                         Qty = sc.nextInt();
-                        /*
-                         * Get Quantity from db somehow
-                         * if(Qty > Quantity)
-                         * {
-                         * System.out.println("Exceeded quantity in stock!");
-                         * }
-                         */
+                        s = "select qty from Stockings where product = '"+name+"'";
+                        rs = stmt.executeQuery(s);
+                        int Quantity = rs.getInt(1);
+                        if(Qty>Quantity)
+                            System.out.println("Exceeded quantity in stock!");
                         System.out.println("Do you want to order more products: ");
                         ch = sc.next().charAt(0);
                         // get price again
@@ -113,6 +111,7 @@ public class Menu {
                 System.out.println("Do you want to continue: ");
                 ch = sc.next().charAt(0);
             } while (ch == 'y');
+            sc.close();
         } catch (Exception e) {
             System.out.println(e);
         }
