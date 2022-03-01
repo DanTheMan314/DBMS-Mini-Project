@@ -65,26 +65,34 @@ public class Menu {
                             System.out.println("Product name\tPrice\tQuantity\n");
                             while(rs.next())
                                 System.out.println(rs.getString(1)+"\t"+rs.getFloat(2)+"\t"+rs.getInt(3));
-                            System.out.println("Enter the name and id of the product on sale: ");
-                            name = sc.nextLine();
+                            System.out.println("Enter the id of the product on sale: ");
                             pid = sc.nextInt();
                             System.out.println("Enter Discount: ");
                             int disc = sc.nextInt();
-                            // a query to get price dunno how exactly
+                            s = "select price from Stockings where product = "+pid;
+                            rs = stmt.executeQuery(s);
+                            rs.next();
+                            price = rs.getFloat(1);
                             price += price * (disc / 100);
-                            // UPDATE Stocking SET Price = price WHERE ProductID == pid;
+                            s = "update stockings set price = "+price+" WHERE pid = "+pid;
+                            rs = stmt.executeQuery(s);
                             break;
-                        case 4:
+                            case 4:
                             System.out.println("Enter product name and id to be deleted: ");
                             name = sc.nextLine();
                             pid = sc.nextInt();
                             System.out.println("Product deleted!");
-                            // DELETE FROM Stocking WHERE ProductID = pid;
+                            s = "delete from stockings where pid = "+pid;
+                            rs = stmt.executeQuery(s);
                             break;
-                        case 5:
+                            case 5:
                             System.out.println("Enter the name and id of the product: ");
                             name = sc.nextLine();
                             pid = sc.nextInt();
+                            System.out.println("OrderID\tQuantity\n");
+                            s = "select oid,qty from stockings s, orders o WHERE s.pid = o.prodid AND s.pid = "
+                            +pid+" AND dateofclosing >= SYSDATE";
+                            rs = stmt.executeQuery(s);
                             // SELECT OrderID, Qty AS Quantity Ordered FROM Stocking s, Orders o WHERE
                             // s.ProductID == o.pid AND s.ProductID == pid AND Date_Of_Closing >= SYSDATE;
                             break;
@@ -117,6 +125,7 @@ public class Menu {
                         Tot_Price += price * Qty;
                         System.out.println("Total price: " + Tot_Price);
                     } while (ch == 'y');
+                    
                     
                     // Set the date of closing as sysdate + random number
                 }
