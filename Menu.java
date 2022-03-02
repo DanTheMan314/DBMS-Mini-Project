@@ -17,7 +17,7 @@ public class Menu {
 
             Scanner sc = new Scanner(System.in);
             String name;
-            int pid, Qty;
+            int pid, Qty,orderno = 0;
             char ch = 'y';
             float price = 0, Tot_Price = 0;
             do {
@@ -113,7 +113,7 @@ public class Menu {
                         name = sc.nextLine();
                         System.out.println("Quantity to be bought: ");
                         Qty = sc.nextInt();
-                        s = "select qty,price from Stockings where product = '"+name+"'";
+                        s = "select qty,price,pid from Stockings where product = '"+name+"'";
                         rs = stmt.executeQuery(s);
                         rs.next();
                         int Quantity = rs.getInt(1);
@@ -125,8 +125,14 @@ public class Menu {
                         Tot_Price += price * Qty;
                         System.out.println("Total price: " + Tot_Price);
                     } while (ch == 'y');
-                    
-                    
+                    System.out.println("Would you like to check out? ");
+                    ch = sc.next().charAt(0);
+                    if(ch == 'y'){
+                        s = "insert into orders values("+orderno+","+rs.getInt(3)+","+Qty+
+                                ",add_months(sysdate,1))";
+                        ps = con.prepareStatement(s);
+                        ps.execute();
+                    }
                     // Set the date of closing as sysdate + random number
                 }
                 System.out.println("Do you want to continue: ");
