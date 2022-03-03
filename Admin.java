@@ -4,8 +4,7 @@ import java.lang.*;
 
 public class Admin {
     Scanner sc = new Scanner(System.in);
-    String s;
-    String name;
+    String s, name;
     int pid, Qty, orderno = 9001, update;
     float price = 0, Tot_Price = 0;
     // step1 load the driver class
