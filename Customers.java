@@ -85,7 +85,8 @@ public class Customers {
                     ps = con.prepareStatement(s);
                     ps.execute();
                     s = "update stockings set qty = " + update + " WHERE pid = " + a[j];
-                    rs = stmt.executeQuery(s);       
+                    ps = con.prepareStatement(s);
+                    ps.execute();       
                 }
             orderno++;
             // Set the date of closing as sysdate + random number
