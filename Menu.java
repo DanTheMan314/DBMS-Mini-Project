@@ -50,7 +50,13 @@ public class Menu {
                 } 
                 else if (c1 == 2) {
                     Customers obc = new Customers();
-                    obc.Order();
+                    System.out.println("Are you a returning customer?");
+                    ch  = sc.next().charAt(0);
+                    if(ch=='y')
+                        obc.Order(1);
+                    
+                    else
+                        obc.Order(0);
                 }
                 System.out.println("Do you want to continue: ");
                 ch = sc.next().charAt(0);
