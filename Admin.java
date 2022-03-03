@@ -8,18 +8,25 @@ public class Admin {
     String s, name;
     Scanner sc = new Scanner(System.in);
     Connection con = null;
-    public void adminStart()
-    {
-        Class.forName("com.mysql.jdbc.Driver");
-        // step1 load the driver class
-        // step2 create the connection object
-        Connection con = DriverManager.getConnection(
-    "jdbc:mysql://localhost:3306/db?characterEncoding=latin1&useConfigs=maxPerformance", "scott", "tiger");
-    // step3 create the statement object
-    Statement stmt = con.createStatement();
+    Statement stmt = null;
     PreparedStatement ps = null;
     ResultSet rs;
+
+    public void adminStart() {
+        try {
+            Statement stmt = con.createStatement();
+            Class.forName("com.mysql.jdbc.Driver");
+            // step1 load the driver class
+            // step2 create the connection object
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/db?characterEncoding=latin1&useConfigs=maxPerformance", "scott",
+                    "tiger");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        // step3 create the statement object
     }
+
     public void Add_Product() {
         System.out.println("Enter the product details:\nProduct name: ");
         name = sc.nextLine();
@@ -31,48 +38,56 @@ public class Admin {
         Qty = sc.nextInt();
         s = "insert into stockings values(" + pid + ",'" + name + "'," + price + "," + Qty
                 + ")";
-        ps = con.prepareStatement(s);
-        ps.execute();
-        break;
+        try {
+            ps = con.prepareStatement(s);
+            ps.execute();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
-
     public void Update_Inventory() {
-        System.out.println("Product list:\n");
-        s = "select product, price, qty FROM Stockings";
-        rs = stmt.executeQuery(s);
-        System.out.println("Product name\tPrice\tQuantity\n");
-        while (rs.next())
-            System.out.println(rs.getString(1) + "\t" + rs.getFloat(2) + "\t" + rs.getInt(3));
-        System.out.println("Enter the name and id of the product to be updated: ");
-        name = sc.nextLine();
-        pid = sc.nextInt();
-        System.out.println("Quantity: ");
-        Qty = sc.nextInt();
-        s = "update stockings set qty = " + Qty + " WHERE pid = " + pid;
-        rs = stmt.executeQuery(s);
-        break;
+        try {
+            System.out.println("Product list:\n");
+            s = "select product, price, qty FROM Stockings";
+            rs = stmt.executeQuery(s);
+            System.out.println("Product name\tPrice\tQuantity\n");
+            while (rs.next())
+                System.out.println(rs.getString(1) + "\t" + rs.getFloat(2) + "\t" + rs.getInt(3));
+            System.out.println("Enter the name and id of the product to be updated: ");
+            name = sc.nextLine();
+            pid = sc.nextInt();
+            System.out.println("Quantity: ");
+            Qty = sc.nextInt();
+            s = "update stockings set qty = " + Qty + " WHERE pid = " + pid;
+            rs = stmt.executeQuery(s);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public void Delete_Product() {
-        System.out.println("Product list:\n");
-        s = "select product, price, qty FROM Stockings";
-        rs = stmt.executeQuery(s);
-        System.out.println("Product name\tPrice\tQuantity\n");
-        while (rs.next())
-            System.out.println(rs.getString(1) + "\t" + rs.getFloat(2) + "\t" + rs.getInt(3));
-        System.out.println("Enter the id of the product on sale: ");
-        pid = sc.nextInt();
-        System.out.println("Enter Discount: ");
-        int disc = sc.nextInt();
-        s = "select price from Stockings where product = " + pid;
-        rs = stmt.executeQuery(s);
-        rs.next();
-        price = rs.getFloat(1);
-        price += price * (disc / 100);
-        s = "update stockings set price = " + price + " WHERE pid = " + pid;
-        rs = stmt.executeQuery(s);
-        break;
+        try {
+            System.out.println("Product list:\n");
+            s = "select product, price, qty FROM Stockings";
+            rs = stmt.executeQuery(s);
+            System.out.println("Product name\tPrice\tQuantity\n");
+            while (rs.next())
+                System.out.println(rs.getString(1) + "\t" + rs.getFloat(2) + "\t" + rs.getInt(3));
+            System.out.println("Enter the id of the product on sale: ");
+            pid = sc.nextInt();
+            System.out.println("Enter Discount: ");
+            int disc = sc.nextInt();
+            s = "select price from Stockings where product = " + pid;
+            rs = stmt.executeQuery(s);
+            rs.next();
+            price = rs.getFloat(1);
+            price += price * (disc / 100);
+            s = "update stockings set price = " + price + " WHERE pid = " + pid;
+            rs = stmt.executeQuery(s);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public void Change_Price() {
@@ -81,6 +96,10 @@ public class Admin {
         pid = sc.nextInt();
         System.out.println("Product deleted!");
         s = "delete from stockings where pid = " + pid;
-        rs = stmt.executeQuery(s);
+        try {
+            rs = stmt.executeQuery(s);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }
