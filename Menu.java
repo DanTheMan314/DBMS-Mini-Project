@@ -29,7 +29,7 @@ public class Menu {
 
             Scanner sc = new Scanner(System.in);
             String name;
-            int pid, Qty, orderno = 9001;
+            int pid, Qty, orderno = 9001, update;
 
             String s = "select oid FROM orders";
             ResultSet rs = stmt.executeQuery(s);
@@ -141,6 +141,7 @@ public class Menu {
                         pid = rs.getInt(3);
                         a[i] = pid;
                         a[i + 1] = Qty;
+                        update = Quantity - a[i+1];
                         i += 2;
                         if (i > 19) {
                             System.out.println("Exceeded cloud storage");
@@ -164,7 +165,8 @@ public class Menu {
                                     + a[j + 1] + ",add_months(sysdate,1))";
                             ps = con.prepareStatement(s);
                             ps.execute();
-
+                            s = "update stockings set Quantity = " + update + " WHERE pid = " + a[j];
+                            rs = stmt.executeQuery(s);
                         }
                         orderno++;
                     }
