@@ -19,6 +19,7 @@ public class Customers {
     char ch = 'y';
     float price = 0, Tot_Price = 0;
     Customers() {
+        name = sc.nextLine();
         try {
             con = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/db?characterEncoding=latin1&useConfigs=maxPerformance", "scott",
