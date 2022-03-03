@@ -147,8 +147,12 @@ public class Menu {
                     ch = sc.next().charAt(0);
 
                     if (ch == 'y') {
-                        s = "insert into orders values(" + orderno + "," + rs.getInt(3) + "," + Qty +
-                                ",add_months(sysdate,1))";
+                        for (int j = 0; j <= i; j++)
+
+                            s = "insert into orders values(" + orderno + "," + list[j].pid + ","
+                                    + list[j].qty + ",add_months(sysdate,1))";
+
+                        orderno++;
                         ps = con.prepareStatement(s);
                         ps.execute();
                     }
