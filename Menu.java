@@ -17,11 +17,11 @@ public class Menu {
             int a[] = new int[20];
             int i;
             // step1 load the driver class
-            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Class.forName("com.mysql.jdbc.Driver");
 
             // step2 create the connection object
             Connection con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:orcl2", "scott", "tigress");
+                    "jdbc:mysql://localhost:3306/db?characterEncoding=latin1&useConfigs=maxPerformance", "scott", "tiger");
 
             // step3 create the statement object
             Statement stmt = con.createStatement();
