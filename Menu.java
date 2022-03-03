@@ -4,8 +4,7 @@ import java.sql.*;
 public class Menu {
     public static void main(String args[]) {
         try {
-            int a[] = new int[20];
-            int i;
+            int a[] = new int[20],i;
             //step1 load the driver class
             Class.forName("com.mysql.jdbc.Driver");
 
