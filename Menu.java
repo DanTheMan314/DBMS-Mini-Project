@@ -4,8 +4,8 @@ import java.sql.*;
 public class Menu {
     public class Product {
         int pid, qty;
-        Product()
-        {
+
+        Product() {
             pid = 0;
             qty = 0;
         }
@@ -21,7 +21,7 @@ public class Menu {
 
             // step2 create the connection object
             Connection con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:orcl2", "scott", "scott");
+                    "jdbc:oracle:thin:@localhost:1521:orcl2", "scott", "tigress");
 
             // step3 create the statement object
             Statement stmt = con.createStatement();
@@ -29,7 +29,12 @@ public class Menu {
 
             Scanner sc = new Scanner(System.in);
             String name;
-            int pid, Qty, orderno = 0;
+            int pid, Qty, orderno = 9001;
+
+            String s = "select oid FROM orders";
+            ResultSet rs = stmt.executeQuery(s);
+            while (rs.next())
+                orderno = rs.getInt(1);
             char ch = 'y';
             float price = 0, Tot_Price = 0;
             do {
@@ -51,7 +56,7 @@ public class Menu {
                             price = sc.nextFloat();
                             System.out.println("Quantity: ");
                             Qty = sc.nextInt();
-                            String s = "insert into stockings values(" + pid + ",'" + name + "'," + price + "," + Qty
+                            s = "insert into stockings values(" + pid + ",'" + name + "'," + price + "," + Qty
                                     + ")";
                             ps = con.prepareStatement(s);
                             ps.execute();
@@ -59,7 +64,7 @@ public class Menu {
                         case 2:
                             System.out.println("Product list:\n");
                             s = "select product, price, qty FROM Stockings";
-                            ResultSet rs = stmt.executeQuery(s);
+                            rs = stmt.executeQuery(s);
                             System.out.println("Product name\tPrice\tQuantity\n");
                             while (rs.next())
                                 System.out.println(rs.getString(1) + "\t" + rs.getFloat(2) + "\t" + rs.getInt(3));
@@ -114,8 +119,8 @@ public class Menu {
                     }
                 } else if (c1 == 2) {
                     System.out.println("Product list:\n");
-                    String s = "select product, price, qty FROM Stockings";
-                    ResultSet rs = stmt.executeQuery(s);
+                    s = "select product, price, qty FROM Stockings";
+                    rs = stmt.executeQuery(s);
                     System.out.println("Product name\tPrice\tQuantity\n");
                     while (rs.next())
                         System.out.println(rs.getString(1) + "\t" + rs.getFloat(2) + "\t" + rs.getInt(3));
@@ -135,8 +140,8 @@ public class Menu {
                         int Quantity = rs.getInt(1);
                         pid = rs.getInt(3);
                         a[i] = pid;
-                        a[i+1]= Qty;
-                        i+=2;
+                        a[i + 1] = Qty;
+                        i += 2;
                         if (i > 19) {
                             System.out.println("Exceeded cloud storage");
                             break;
@@ -153,14 +158,15 @@ public class Menu {
                     ch = sc.next().charAt(0);
 
                     if (ch == 'y') {
-                        for (int j = 0; j < i; j+=2)
+                        for (int j = 0; j < i; j += 2) {
 
                             s = "insert into orders values(" + orderno + "," + a[j] + ","
-                                    + a[j+1] + ",add_months(sysdate,1))";
+                                    + a[j + 1] + ",add_months(sysdate,1))";
+                            ps = con.prepareStatement(s);
+                            ps.execute();
 
+                        }
                         orderno++;
-                        ps = con.prepareStatement(s);
-                        ps.execute();
                     }
                     // Set the date of closing as sysdate + random number
                 }
