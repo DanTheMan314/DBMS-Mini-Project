@@ -2,6 +2,10 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "c:\\Users\\snape\\Downloads\\ojdbc14.jar",
+<<<<<<< HEAD
         "c:\\Users\\student\\Downloads\\ojdbc14.jar"
+=======
+        "c:\\oracle\\product\\10.2.0\\db_1\\jdbc\\lib\\ojdbc14.jar"
+>>>>>>> 065db6d6851a787f1cae39f066851e380fe66a84
     ]
 }

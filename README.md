@@ -1,1 +1,1 @@
-# DBMS-Mini-ProjectA line I wrote on my local computer
+A Mini project implementing a basic shopping cart
