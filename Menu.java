@@ -35,6 +35,8 @@ public class Menu {
             ResultSet rs = stmt.executeQuery(s);
             if(!rs.next())
                 orderno = 9001;
+            else 
+                orderno = rs.getInt(1);
             while (rs.next())
                 orderno = rs.getInt(1);
             char ch = 'y';
