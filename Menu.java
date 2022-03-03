@@ -4,10 +4,9 @@ import java.sql.*;
 public class Menu {
     public static void main(String args[]) {
         try {
-
             int a[] = new int[20];
             int i;
-            // step1 load the driver class
+            //step1 load the driver class
             Class.forName("com.mysql.jdbc.Driver");
 
             // step2 create the connection object
@@ -28,7 +27,7 @@ public class Menu {
             while (rs.next())
                 orderno = rs.getInt(1);
             char ch = 'y';
-            float price = 0, Tot_Price = 0;
+            float price = 0, Tot_Price = 0;*/
             do {
                 System.out.print("User choice:\n1.Admin\n2.Customer\nEnter choice: ");
                 int c1 = sc.nextInt();
@@ -40,18 +39,7 @@ public class Menu {
                     name = sc.nextLine();
                     switch (c2) {
                         case 1:
-                            System.out.println("Enter the product details:\nProduct name: ");
-                            name = sc.nextLine();
-                            System.out.println("Product id: ");
-                            pid = sc.nextInt();
-                            System.out.println("Price: ");
-                            price = sc.nextFloat();
-                            System.out.println("Quantity: ");
-                            Qty = sc.nextInt();
-                            s = "insert into stockings values(" + pid + ",'" + name + "'," + price + "," + Qty
-                                    + ")";
-                            ps = con.prepareStatement(s);
-                            ps.execute();
+                            oba.Add_Product();
                             break;
                         case 2:
                             System.out.println("Product list:\n");
@@ -152,7 +140,7 @@ public class Menu {
                         System.out.println("Do you want to order more products or would you like to check out: ");
                         ch = sc.next().charAt(0);
                     } while (ch == 'y');
-                    
+
                     if (ch == 'y') {
                         for (int j = 0; j < i; j += 2) {
 

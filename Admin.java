@@ -9,11 +9,9 @@ public class Admin {
     float price = 0, Tot_Price = 0;
     // step1 load the driver class
     Class.forName("com.mysql.jdbc.Driver");
-
     // step2 create the connection object
     Connection con = DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/db?characterEncoding=latin1&useConfigs=maxPerformance", "scott", "tiger");
-
+    "jdbc:mysql://localhost:3306/db?characterEncoding=latin1&useConfigs=maxPerformance", "scott", "tiger");
     // step3 create the statement object
     Statement stmt = con.createStatement();
     PreparedStatement ps = null;
@@ -50,7 +48,7 @@ public class Admin {
         rs = stmt.executeQuery(s);
         break;
     }
-    public void Change_Price()
+    public void Delete_Product()
     {
         System.out.println("Product list:\n");
         s = "select product, price, qty FROM Stockings";
@@ -70,5 +68,14 @@ public class Admin {
         s = "update stockings set price = " + price + " WHERE pid = " + pid;
         rs = stmt.executeQuery(s);
         break;
+    }
+    public void Change_Price()
+    {
+        System.out.println("Enter product name and id to be deleted: ");
+        name = sc.nextLine();
+        pid = sc.nextInt();
+        System.out.println("Product deleted!");
+        s = "delete from stockings where pid = " + pid;
+        rs = stmt.executeQuery(s);
     }
 }
