@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.sql.*;
-import java.lang.*;
 
 public class Admin {
     int pid, Qty, orderno = 9001, update;
@@ -14,11 +13,11 @@ public class Admin {
 
     public void adminStart() {
         try {
-            Statement stmt = con.createStatement();
-            Class.forName("com.mysql.jdbc.Driver");
+            stmt = con.createStatement();
             // step1 load the driver class
+            Class.forName("com.mysql.jdbc.Driver");
             // step2 create the connection object
-            Connection con = DriverManager.getConnection(
+            con = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/db?characterEncoding=latin1&useConfigs=maxPerformance", "scott",
                     "tiger");
         } catch (Exception e) {
