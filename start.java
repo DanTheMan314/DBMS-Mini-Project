@@ -7,21 +7,25 @@ class Start
         try 
         {
             // step1 load the driver class
-            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Class.forName("com.mysql.jdbc.Driver");
 
             // step2 create the connection object
             Connection con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:orcl2", "scott", "scott");
+                    "jdbc:mysql://localhost:3306/db?characterEncoding=latin1&useConfigs=maxPerformance", "scott", "tiger");
 
             // step3 create the statement object
             Statement stmt = con.createStatement();
             PreparedStatement ps = null;
             // step4 execute query
-            ResultSet Stockings = stmt.executeQuery("create table stockings( pid number primary key"
-            +", product varchar(20), price number, qty number)");
-            ResultSet Orders = stmt.executeQuery("CREATE TABLE ORDERS (Oid number PRIMARY KEY, Prodid"
-            + " NUMBER,FOREIGN KEY (Prodid) REFERENCES Stockings(Pid), qty number, dateofclosing date)");
-            String s = "insert into stockings values(121,'cold coffee',88,10)";
+            String s = "create table stockings( pid integer primary key"
+            +", product varchar(20), price integer, qty integer)";
+            ps = con.prepareStatement(s);
+            ps.execute();
+            s = "CREATE TABLE ORDERS (Oid integer PRIMARY KEY, Prodid"
+            + " NUMBER,FOREIGN KEY (Prodid) REFERENCES Stockings(Pid), qty number, dateofclosing date)";
+            ps = con.prepareStatement(s);
+            ps.execute();
+            s = "insert into stockings values(121,'cold coffee',88,10)";
             ps = con.prepareStatement(s);
             ps.execute();
             s = "insert into stockings values(122,'doughnuts',120,20)";
