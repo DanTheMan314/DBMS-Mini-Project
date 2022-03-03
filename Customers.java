@@ -81,7 +81,6 @@ public class Customers {
             } while (ch == 'y');
         
                 for (int j = 0; j < i; j += 2) {
-                    System.out.println(orderno);
                     s = "insert into orders values(" + orderno + "," + a[j] + ","
                         + a[j + 1] + ",SYSDATE())";
                     ps = con.prepareStatement(s);
