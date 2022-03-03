@@ -4,11 +4,17 @@ import java.sql.*;
 public class Menu {
     public class Product {
         int pid, qty;
+        Product()
+        {
+            pid = 0;
+            qty = 0;
+        }
     }
 
     public static void main(String args[]) {
         try {
             Product list[] = new Product[10];
+            int a[] = new int[20];
             int i;
             // step1 load the driver class
             Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -114,11 +120,8 @@ public class Menu {
                     while (rs.next())
                         System.out.println(rs.getString(1) + "\t" + rs.getFloat(2) + "\t" + rs.getInt(3));
 
-                    for (i = 0; i < 10; i++)
-                    {
-                        list[i].pid = 0;
-                        list[i].qty = 0;
-                    }
+                    for (i = 0; i < 20; i++)
+                        a[i] = 0;
                     i = 0;
                     do {
                         System.out.println("Enter the name of the product: ");
@@ -131,10 +134,10 @@ public class Menu {
                         rs.next();
                         int Quantity = rs.getInt(1);
                         pid = rs.getInt(3);
-                        list[i].pid = pid;
-                        list[i].qty = Qty;
-                        i++;
-                        if (i > 9) {
+                        a[i] = pid;
+                        a[i+1]= Qty;
+                        i+=2;
+                        if (i > 19) {
                             System.out.println("Exceeded cloud storage");
                             break;
                         }
@@ -150,10 +153,10 @@ public class Menu {
                     ch = sc.next().charAt(0);
 
                     if (ch == 'y') {
-                        for (int j = 0; j <= i; j++)
+                        for (int j = 0; j <= i; j+=2)
 
-                            s = "insert into orders values(" + orderno + "," + list[j].pid + ","
-                                    + list[j].qty + ",add_months(sysdate,1))";
+                            s = "insert into orders values(" + orderno + "," + a[j] + ","
+                                    + a[j+1] + ",add_months(sysdate,1))";
 
                         orderno++;
                         ps = con.prepareStatement(s);
