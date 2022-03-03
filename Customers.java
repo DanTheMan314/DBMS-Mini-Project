@@ -58,7 +58,7 @@ public class Customers {
             } else {
                 System.out.println("Enter your name");
                 String cname = sc.nextLine();
-                s = "select cid,total FROM Customers where cname = " + cname;
+                s = "select cid,total FROM Customers where cname = '" + cname+"'";
                 rs = stmt.executeQuery(s);
                 rs.next();
                 custno = rs.getInt(1);
