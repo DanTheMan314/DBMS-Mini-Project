@@ -11,7 +11,7 @@ public class Admin {
     PreparedStatement ps = null;
     ResultSet rs;
 
-    public Admin() {
+    Admin() {
         try {
             stmt = con.createStatement();
             // step1 load the driver class
