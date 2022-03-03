@@ -75,7 +75,7 @@ public class Customers {
                 price = rs.getFloat(2);
                 Tot_Price += price * Qty;
                 System.out.println("Total price: " + Tot_Price);
-                System.out.println("Do you want to order more products or would you like to check: ");
+                System.out.println("Do you want to order more products?");
                 ch = sc.next().charAt(0);
             } while (ch == 'y');
             if (ch == 'y') {
