@@ -14,6 +14,8 @@ public class Menu {
     public static void main(String args[]) {
         try {
             Product list[] = new Product[10];
+            Admin oba = new Admin();
+            Customers obc = new Customers();
             int a[] = new int[20];
             int i;
             // step1 load the driver class
@@ -30,7 +32,6 @@ public class Menu {
             Scanner sc = new Scanner(System.in);
             String name;
             int pid, Qty, orderno = 9001, update;
-
             String s = "select oid FROM orders";
             ResultSet rs = stmt.executeQuery(s);
             if(!rs.next())
@@ -50,7 +51,6 @@ public class Menu {
                     switch (c2) {
                         case 1:
                             System.out.println("Enter the product details:\nProduct name: ");
-
                             name = sc.nextLine();
                             System.out.println("Product id: ");
                             pid = sc.nextInt();
@@ -150,12 +150,15 @@ public class Menu {
                             break;
                         }
                         if (Qty > Quantity)
+                        {
                             System.out.println("Exceeded quantity in stock!");
-                        System.out.println("Do you want to order more products: ");
-                        ch = sc.next().charAt(0);
+                            break;
+                        }
                         price = rs.getFloat(2);
                         Tot_Price += price * Qty;
                         System.out.println("Total price: " + Tot_Price);
+                        System.out.println("Do you want to order more products: ");
+                        ch = sc.next().charAt(0);
                     } while (ch == 'y');
                     System.out.println("Would you like to check out? ");
                     ch = sc.next().charAt(0);
@@ -167,7 +170,7 @@ public class Menu {
                                     + a[j + 1] + ",TIMESTAMPADD(MONTH, 2, SYSDATE()))";
                             ps = con.prepareStatement(s);
                             ps.execute();
-                            s = "update stockings set Quantity = " + update + " WHERE pid = " + a[j];
+                            s = "update stockings set qty = " + update + " WHERE pid = " + a[j];
                             rs = stmt.executeQuery(s);
                         }
                         orderno++;
