@@ -29,16 +29,14 @@ public class Menu {
 
             Scanner sc = new Scanner(System.in);
             String name;
-            int pid, Qty, orderno = 9001, update;
+            int pid, Qty, orderno = 9001, update, t=0;
 
             String s = "select oid FROM orders";
             ResultSet rs = stmt.executeQuery(s);
-            if(!rs.next())
-                orderno = 9001;
-            else 
-                orderno = rs.getInt(1);
-            while (rs.next())
-                orderno = rs.getInt(1);
+            rs.next();
+            orderno = rs.getInt(1) + 1;
+            System.out.print(rs.getInt(1));
+            System.out.println(" " + orderno + " orderno " + t + " t");
             char ch = 'y';
             float price = 0, Tot_Price = 0;
             do {
@@ -91,7 +89,7 @@ public class Menu {
                             pid = sc.nextInt();
                             System.out.println("Enter Discount: ");
                             int disc = sc.nextInt();
-                            s = "select price from Stockings where product = " + pid;
+                            s = "select price from Stockings where pid = " + pid;
                             rs = stmt.executeQuery(s);
                             rs.next();
                             price = rs.getFloat(1);
@@ -145,7 +143,7 @@ public class Menu {
                         pid = rs.getInt(3);
                         a[i] = pid;
                         a[i + 1] = Qty;
-                        update = Quantity - a[i+1];
+                        update = Quantity - a[i + 1];
                         i += 2;
                         if (i > 19) {
                             System.out.println("Exceeded cloud storage");
@@ -164,12 +162,12 @@ public class Menu {
 
                     if (ch == 'y') {
                         for (int j = 0; j < i; j += 2) {
-                            //inserting the orders product by product
+                            // inserting the orders product by product
                             s = "insert into orders values(" + orderno + "," + a[j] + ","
                                     + a[j + 1] + ",add_months(sysdate,1))";
                             ps = con.prepareStatement(s);
                             ps.execute();
-                            //updating the inventory in the stockings table
+                            // updating the inventory in the stockings table
                             s = "update stockings set Qty = " + update + " WHERE pid = " + a[j];
                             rs = stmt.executeQuery(s);
                         }
