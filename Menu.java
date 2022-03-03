@@ -8,15 +8,15 @@ public class Menu {
             Class.forName("com.mysql.jdbc.Driver");
 
             // step2 create the connection object
-            Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/db?characterEncoding=latin1&useConfigs=maxPerformance", "scott", "scott");
+            /*Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/db?characterEncoding=latin1&useConfigs=maxPerformance", "scott", "tiger");
 
             // step3 create the statement object
             Statement stmt = con.createStatement();
-            //PreparedStatement ps = null;
+            String name;
+            //PreparedStatement ps = null;*/
 
             Scanner sc = new Scanner(System.in);
-            String name;
             //int pid, Qty, update, t=0; 
             char ch = 'y';
             //float price = 0, Tot_Price = 0;

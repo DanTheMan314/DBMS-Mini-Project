@@ -16,7 +16,7 @@ public class Admin {
         try {
             con = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/db?characterEncoding=latin1&useConfigs=maxPerformance", "scott",
-                    "scott");
+                    "tiger");
             stmt = con.createStatement();
             // step1 load the driver class
             Class.forName("com.mysql.jdbc.Driver");
