@@ -22,7 +22,7 @@ class Start
             ps = con.prepareStatement(s);
             ps.execute();
             s = "CREATE TABLE ORDERS (Oid integer PRIMARY KEY, Prodid"
-            + " NUMBER,FOREIGN KEY (Prodid) REFERENCES Stockings(Pid), qty number, dateofclosing date)";
+            + " integer,FOREIGN KEY (Prodid) REFERENCES Stockings(Pid), qty integer, dateofclosing date)";
             ps = con.prepareStatement(s);
             ps.execute();
             s = "insert into stockings values(121,'cold coffee',88,10)";
