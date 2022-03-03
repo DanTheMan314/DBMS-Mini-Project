@@ -78,12 +78,12 @@ public class Admin {
             System.out.println("Enter the id of the product on sale: ");
             pid = sc.nextInt();
             System.out.println("Enter Discount: ");
-            int disc = sc.nextInt();
+            float disc = sc.nextInt();
             s = "select price from Stockings where pid = " + pid;
             rs = stmt.executeQuery(s);
             rs.next();
             price = rs.getFloat(1);
-            price += price * (disc / 100);
+            price -= price * (disc / 100);
             s = "update stockings set price = " + price + " WHERE pid = " + pid;
             ps = con.prepareStatement(s);
             ps.execute();
