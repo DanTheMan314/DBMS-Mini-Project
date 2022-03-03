@@ -36,6 +36,10 @@ public class Customers {
     {
         try
         {
+            s = "select oid FROM Orders";
+            rs = stmt.executeQuery(s);
+            while(rs.next())
+                orderno = rs.getInt(1);
             System.out.println("Product list:\n");
             s = "select product, price, qty FROM Stockings";
             rs = stmt.executeQuery(s);
