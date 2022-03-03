@@ -12,7 +12,6 @@ public class Admin {
     ResultSet rs;
 
     Admin() {
-        name = sc.nextLine();
         try {
             con = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/db?characterEncoding=latin1&useConfigs=maxPerformance", "scott",
@@ -54,8 +53,7 @@ public class Admin {
             System.out.println("Product name\tPrice\tQuantity\n");
             while (rs.next())
                 System.out.println(rs.getString(1) + "\t" + rs.getFloat(2) + "\t" + rs.getInt(3));
-            System.out.println("Enter the name and id of the product to be updated: ");
-            name = sc.nextLine();
+            System.out.println("Enter the id of the product to be updated: ");
             pid = sc.nextInt();
             System.out.println("Quantity: ");
             Qty = sc.nextInt();
@@ -91,7 +89,7 @@ public class Admin {
     }
 
     public void Delete_Product() {
-        System.out.println("Enter product name and id to be deleted: ");
+        System.out.println("Enter product id to be deleted: ");
         name = sc.nextLine();
         pid = sc.nextInt();
         System.out.println("Product deleted!");

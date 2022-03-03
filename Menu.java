@@ -34,7 +34,7 @@ public class Menu {
                             oba.Add_Product();
                             break;
                         case 2:
-                            oba.Delete_Product();
+                            oba.Update_Inventory();
                             break;
                         case 3:
                             oba.Change_Price();
