@@ -15,7 +15,7 @@ public class Menu {
 
             // step2 create the connection object
             Connection con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:orcl2", "scott", "tigress");
+                    "jdbc:oracle:thin:@localhost:1521:orcl2", "scott", "scott");
 
             // step3 create the statement object
             Statement stmt = con.createStatement();
@@ -115,7 +115,10 @@ public class Menu {
                         System.out.println(rs.getString(1) + "\t" + rs.getFloat(2) + "\t" + rs.getInt(3));
 
                     for (i = 0; i < 10; i++)
-                        list[i].pid = list[i].qty = 0;
+                    {
+                        list[i].pid = 0;
+                        list[i].qty = 0;
+                    }
                     i = 0;
                     do {
                         System.out.println("Enter the name of the product: ");

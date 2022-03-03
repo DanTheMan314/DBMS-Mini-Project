@@ -11,7 +11,7 @@ class Start
 
             // step2 create the connection object
             Connection con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:orcl2", "scott", "tigress");
+                    "jdbc:oracle:thin:@localhost:1521:orcl2", "scott", "scott");
 
             // step3 create the statement object
             Statement stmt = con.createStatement();
@@ -34,11 +34,11 @@ class Start
             while (rsSt.next())
             {System.out.println(rsSt.getInt(1) + "  " + rsSt.getString(2) + "  \tRs." + rsSt.getInt(3)+" \tx "+rsSt.getInt(4));}
             s = "drop table orders";
-            ps = con.prepareStatement(s);
+           /* ps = con.prepareStatement(s);
             boolean result = ps.execute();
             s = "drop table stockings";
             ps = con.prepareStatement(s);
-            result = ps.execute();
+            result = ps.execute();*/
             // step5 close the connection object
             con.close();
             
