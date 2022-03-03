@@ -2,20 +2,9 @@ import java.util.Scanner;
 import java.sql.*;
 
 public class Menu {
-    public class Product {
-        int pid, qty;
-
-        Product() {
-            pid = 0;
-            qty = 0;
-        }
-    }
-
     public static void main(String args[]) {
         try {
-            Product list[] = new Product[10];
-            Admin oba = new Admin();
-            Customers obc = new Customers();
+
             int a[] = new int[20];
             int i;
             // step1 load the driver class
@@ -44,6 +33,7 @@ public class Menu {
                 System.out.print("User choice:\n1.Admin\n2.Customer\nEnter choice: ");
                 int c1 = sc.nextInt();
                 if (c1 == 1) {
+                    Admin oba = new Admin();
                     System.out.print(
                             "Admin functions:\n1.Add a new product\n2.Update inventory\n3.Change price\n4.Delete a product\n5.View all orders for a certain product\nEnter choice: ");
                     int c2 = sc.nextInt();
@@ -119,7 +109,9 @@ public class Menu {
                         default:
                             System.out.println("Invalid choice!");
                     }
-                } else if (c1 == 2) {
+                } 
+                else if (c1 == 2) {
+                    Customers obc = new Customers();
                     System.out.println("Product list:\n");
                     s = "select product, price, qty FROM Stockings";
                     rs = stmt.executeQuery(s);
@@ -172,6 +164,7 @@ public class Menu {
                             ps.execute();
                             s = "update stockings set qty = " + update + " WHERE pid = " + a[j];
                             rs = stmt.executeQuery(s);
+                            
                         }
                         orderno++;
                     }
