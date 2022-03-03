@@ -1,6 +1,6 @@
-Insert into orders values(1,121,5,STR_TO_DATE('2013-02-11', '%Y-%m-%d'));
-Insert into orders values(2,122,6,STR_TO_DATE('2013-02-11', '%Y-%m-%d'));
-Insert into orders values(3,121,1,STR_TO_DATE('2013-02-11', '%Y-%m-%d'));
+Insert into orders values(1,121,100,5,STR_TO_DATE('2013-02-11', '%Y-%m-%d'));
+Insert into orders values(2,122,100,6,STR_TO_DATE('2013-02-11', '%Y-%m-%d'));
+Insert into orders values(3,121,100,1,STR_TO_DATE('2013-02-11', '%Y-%m-%d'));
 
 drop table orders;
 CREATE TABLE ORDERS (Oid integer PRIMARY KEY, Prodid integer, custid integer, qty integer, dateofclosing date);
