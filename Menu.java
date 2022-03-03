@@ -42,57 +42,16 @@ public class Menu {
                             oba.Add_Product();
                             break;
                         case 2:
-                            System.out.println("Product list:\n");
-                            s = "select product, price, qty FROM Stockings";
-                            rs = stmt.executeQuery(s);
-                            System.out.println("Product name\tPrice\tQuantity\n");
-                            while (rs.next())
-                                System.out.println(rs.getString(1) + "\t" + rs.getFloat(2) + "\t" + rs.getInt(3));
-                            System.out.println("Enter the name and id of the product to be updated: ");
-                            name = sc.nextLine();
-                            pid = sc.nextInt();
-                            System.out.println("Quantity: ");
-                            Qty = sc.nextInt();
-                            s = "update stockings set qty = " + Qty + " WHERE pid = " + pid;
-                            rs = stmt.executeQuery(s);
+                            oba.Delete_Product();
                             break;
                         case 3:
-                            System.out.println("Product list:\n");
-                            s = "select product, price, qty FROM Stockings";
-                            rs = stmt.executeQuery(s);
-                            System.out.println("Product name\tPrice\tQuantity\n");
-                            while (rs.next())
-                                System.out.println(rs.getString(1) + "\t" + rs.getFloat(2) + "\t" + rs.getInt(3));
-                            System.out.println("Enter the id of the product on sale: ");
-                            pid = sc.nextInt();
-                            System.out.println("Enter Discount: ");
-                            int disc = sc.nextInt();
-                            s = "select price from Stockings where pid = " + pid;
-                            rs = stmt.executeQuery(s);
-                            rs.next();
-                            price = rs.getFloat(1);
-                            price += price * (disc / 100);
-                            s = "update stockings set price = " + price + " WHERE pid = " + pid;
-                            rs = stmt.executeQuery(s);
+                            oba.Change_Price();
                             break;
                         case 4:
-                            System.out.println("Enter product name and id to be deleted: ");
-                            name = sc.nextLine();
-                            pid = sc.nextInt();
-                            System.out.println("Product deleted!");
-                            s = "delete from stockings where pid = " + pid;
-                            rs = stmt.executeQuery(s);
+                            oba.Delete_Product();
                             break;
                         case 5:
-                            System.out.println("Enter the name and id of the product: ");
-                            name = sc.nextLine();
-                            pid = sc.nextInt();
-                            System.out.println("OrderID\tQuantity\n");
-                            s = "select oid,qty from stockings s, orders o WHERE s.pid = o.prodid AND s.pid = "
-                                    + pid + " AND dateofclosing >= SYSDATE";
-                            rs = stmt.executeQuery(s);
-                            // SELECT OrderID, Qty AS Quantity Ordered FROM Stocking s, Orders o WHERE
-                            // s.ProductID == o.pid AND s.ProductID == pid AND Date_Of_Closing >= SYSDATE;
+                            oba.View_Orders();
                             break;
                         default:
                             System.out.println("Invalid choice!");

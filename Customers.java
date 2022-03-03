@@ -18,7 +18,7 @@ public class Customers {
     int pid, Qty, orderno = 9001, update;
     char ch = 'y';
     float price = 0, Tot_Price = 0;
-    public void customerStart() {
+    public void adminStart() {
         try {
             stmt = con.createStatement();
             // step1 load the driver class

@@ -65,7 +65,7 @@ public class Admin {
         }
     }
 
-    public void Delete_Product() {
+    public void Change_Price() {
         try {
             System.out.println("Product list:\n");
             s = "select product, price, qty FROM Stockings";
@@ -89,7 +89,7 @@ public class Admin {
         }
     }
 
-    public void Change_Price() {
+    public void Delete_Product() {
         System.out.println("Enter product name and id to be deleted: ");
         name = sc.nextLine();
         pid = sc.nextInt();
@@ -98,6 +98,23 @@ public class Admin {
         try {
             rs = stmt.executeQuery(s);
         } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    public void View_Orders()
+    {
+        try{
+            System.out.println("Enter the name and id of the product: ");
+            name = sc.nextLine();
+            pid = sc.nextInt();
+            System.out.println("OrderID\tQuantity\n");
+            s = "select oid,qty from stockings s, orders o WHERE s.pid = o.prodid AND s.pid = "
+                + pid + " AND dateofclosing >= SYSDATE";
+            rs = stmt.executeQuery(s);
+            // SELECT OrderID, Qty AS Quantity Ordered FROM Stocking s, Orders o WHERE
+            // s.ProductID == o.pid AND s.ProductID == pid AND Date_Of_Closing >= SYSDATE;
+        }
+        catch (Exception e) {
             System.out.println(e);
         }
     }
