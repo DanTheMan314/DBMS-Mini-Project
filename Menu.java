@@ -18,14 +18,6 @@ public class Menu {
             Scanner sc = new Scanner(System.in);
             String name;
             //int pid, Qty, update, t=0; 
-            int orderno = 9001;
-
-            String s = "select oid FROM orders";
-            ResultSet rs = stmt.executeQuery(s);
-            rs.next();
-            orderno = rs.getInt(1) + 1;
-            System.out.print(rs.getInt(1));
-            System.out.println(" " + orderno + " orderno " + t + " t");
             char ch = 'y';
             //float price = 0, Tot_Price = 0;
             do {
@@ -36,7 +28,7 @@ public class Menu {
                     System.out.print(
                             "Admin functions:\n1.Add a new product\n2.Update inventory\n3.Change price\n4.Delete a product\n5.View all orders for a certain product\nEnter choice: ");
                     int c2 = sc.nextInt();
-                    name = sc.nextLine();
+                    
                     switch (c2) {
                         case 1:
                             oba.Add_Product();

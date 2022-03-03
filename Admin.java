@@ -12,6 +12,7 @@ public class Admin {
     ResultSet rs;
 
     Admin() {
+        name = sc.nextLine();
         try {
             stmt = con.createStatement();
             // step1 load the driver class
