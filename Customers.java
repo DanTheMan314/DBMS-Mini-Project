@@ -40,6 +40,7 @@ public class Customers {
             rs = stmt.executeQuery(s);
             while(rs.next())
                 orderno = rs.getInt(1);
+            orderno++;
             System.out.println("Product list:\n");
             s = "select product, price, qty FROM Stockings";
             rs = stmt.executeQuery(s);
@@ -81,7 +82,7 @@ public class Customers {
             if (ch == 'y') {
                 for (int j = 0; j < i; j += 2) {
                     s = "insert into orders values(" + orderno + "," + a[j] + ","
-                        + a[j + 1] + ",TIMESTAMPADD(MONTH, 2, SYSDATE()))";
+                        + a[j + 1] + ",SYSDATE())";
                     ps = con.prepareStatement(s);
                     ps.execute();
                     s = "update stockings set qty = " + update + " WHERE pid = " + a[j];

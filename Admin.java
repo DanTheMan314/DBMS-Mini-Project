@@ -126,7 +126,7 @@ public class Admin {
             System.out.println("Enter the id of the product: ");
             pid = sc.nextInt();
             System.out.println("OrderID\tQuantity\n");
-            s = "select oid,qty from stockings s, orders o WHERE s.pid = o.prodid AND s.pid = "
+            s = "select oid,o.qty from stockings s, orders o WHERE s.pid = o.prodid AND s.pid = "
                     + pid + " AND dateofclosing >= SYSDATE";
             rs = stmt.executeQuery(s);
             // SELECT OrderID, Qty AS Quantity Ordered FROM Stocking s, Orders o WHERE
