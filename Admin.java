@@ -102,7 +102,6 @@ public class Admin {
                 System.out.println(rs.getInt(1)+"\t"+rs.getString(2) + "\t" + 
                 rs.getFloat(3) + "\t" + rs.getInt(4));
             System.out.println("Enter product id to be deleted: ");
-            name = sc.nextLine();
             pid = sc.nextInt();
             System.out.println("Product deleted!");
             s = "delete from stockings where pid = " + pid;
