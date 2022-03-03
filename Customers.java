@@ -20,13 +20,13 @@ public class Customers {
     float price = 0, Tot_Price = 0;
     Customers() {
         try {
+            con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/db?characterEncoding=latin1&useConfigs=maxPerformance", "scott",
+                    "scott");
             stmt = con.createStatement();
             // step1 load the driver class
             Class.forName("com.mysql.jdbc.Driver");
             // step2 create the connection object
-            con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/db?characterEncoding=latin1&useConfigs=maxPerformance", "scott",
-                    "tiger");
         } catch (Exception e) {
             System.out.println(e);
         }

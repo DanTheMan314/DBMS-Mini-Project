@@ -9,7 +9,7 @@ public class Menu {
 
             // step2 create the connection object
             Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/db?characterEncoding=latin1&useConfigs=maxPerformance", "scott", "tiger");
+                    "jdbc:mysql://localhost:3306/db?characterEncoding=latin1&useConfigs=maxPerformance", "scott", "scott");
 
             // step3 create the statement object
             Statement stmt = con.createStatement();

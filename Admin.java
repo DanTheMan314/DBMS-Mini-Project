@@ -14,13 +14,13 @@ public class Admin {
     Admin() {
         name = sc.nextLine();
         try {
+            con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/db?characterEncoding=latin1&useConfigs=maxPerformance", "scott",
+                    "scott");
             stmt = con.createStatement();
             // step1 load the driver class
             Class.forName("com.mysql.jdbc.Driver");
             // step2 create the connection object
-            con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/db?characterEncoding=latin1&useConfigs=maxPerformance", "scott",
-                    "tiger");
         } catch (Exception e) {
             System.out.println(e);
         }
