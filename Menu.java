@@ -164,12 +164,13 @@ public class Menu {
 
                     if (ch == 'y') {
                         for (int j = 0; j < i; j += 2) {
-
+                            //inserting the orders product by product
                             s = "insert into orders values(" + orderno + "," + a[j] + ","
                                     + a[j + 1] + ",add_months(sysdate,1))";
                             ps = con.prepareStatement(s);
                             ps.execute();
-                            s = "update stockings set Quantity = " + update + " WHERE pid = " + a[j];
+                            //updating the inventory in the stockings table
+                            s = "update stockings set Qty = " + update + " WHERE pid = " + a[j];
                             rs = stmt.executeQuery(s);
                         }
                         orderno++;
