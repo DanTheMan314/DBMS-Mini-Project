@@ -3,19 +3,23 @@ import java.sql.*;
 import java.lang.*;
 
 public class Admin {
-    Scanner sc = new Scanner(System.in);
-    String s, name;
     int pid, Qty, orderno = 9001, update;
     float price = 0, Tot_Price = 0;
-    // step1 load the driver class
-    Class.forName("com.mysql.jdbc.Driver");
-    // step2 create the connection object
-    Connection con = DriverManager.getConnection(
+    String s, name;
+    Scanner sc = new Scanner(System.in);
+    Connection con = null;
+    public void adminStart()
+    {
+        Class.forName("com.mysql.jdbc.Driver");
+        // step1 load the driver class
+        // step2 create the connection object
+        Connection con = DriverManager.getConnection(
     "jdbc:mysql://localhost:3306/db?characterEncoding=latin1&useConfigs=maxPerformance", "scott", "tiger");
     // step3 create the statement object
     Statement stmt = con.createStatement();
     PreparedStatement ps = null;
     ResultSet rs;
+    }
     public void Add_Product() {
         System.out.println("Enter the product details:\nProduct name: ");
         name = sc.nextLine();
@@ -31,8 +35,9 @@ public class Admin {
         ps.execute();
         break;
     }
-    public void Update_Inventory()
-    {
+
+
+    public void Update_Inventory() {
         System.out.println("Product list:\n");
         s = "select product, price, qty FROM Stockings";
         rs = stmt.executeQuery(s);
@@ -48,8 +53,8 @@ public class Admin {
         rs = stmt.executeQuery(s);
         break;
     }
-    public void Delete_Product()
-    {
+
+    public void Delete_Product() {
         System.out.println("Product list:\n");
         s = "select product, price, qty FROM Stockings";
         rs = stmt.executeQuery(s);
@@ -69,8 +74,8 @@ public class Admin {
         rs = stmt.executeQuery(s);
         break;
     }
-    public void Change_Price()
-    {
+
+    public void Change_Price() {
         System.out.println("Enter product name and id to be deleted: ");
         name = sc.nextLine();
         pid = sc.nextInt();
