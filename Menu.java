@@ -2,26 +2,16 @@ import java.util.Scanner;
 import java.sql.*;
 
 public class Menu {
-    public class Product {
-        int pid, qty;
-
-        Product() {
-            pid = 0;
-            qty = 0;
-        }
-    }
-
     public static void main(String args[]) {
         try {
-            Product list[] = new Product[10];
             int a[] = new int[20];
             int i;
-            // step1 load the driver class
-            Class.forName("oracle.jdbc.driver.OracleDriver");
+            //step1 load the driver class
+            Class.forName("com.mysql.jdbc.Driver");
 
             // step2 create the connection object
             Connection con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:orcl2", "scott", "tigress");
+                    "jdbc:mysql://localhost:3306/db?characterEncoding=latin1&useConfigs=maxPerformance", "scott", "tiger");
 
             // step3 create the statement object
             Statement stmt = con.createStatement();
@@ -43,25 +33,14 @@ public class Menu {
                 System.out.print("User choice:\n1.Admin\n2.Customer\nEnter choice: ");
                 int c1 = sc.nextInt();
                 if (c1 == 1) {
+                    Admin oba = new Admin();
                     System.out.print(
                             "Admin functions:\n1.Add a new product\n2.Update inventory\n3.Change price\n4.Delete a product\n5.View all orders for a certain product\nEnter choice: ");
                     int c2 = sc.nextInt();
                     name = sc.nextLine();
                     switch (c2) {
                         case 1:
-                            System.out.println("Enter the product details:\nProduct name: ");
-
-                            name = sc.nextLine();
-                            System.out.println("Product id: ");
-                            pid = sc.nextInt();
-                            System.out.println("Price: ");
-                            price = sc.nextFloat();
-                            System.out.println("Quantity: ");
-                            Qty = sc.nextInt();
-                            s = "insert into stockings values(" + pid + ",'" + name + "'," + price + "," + Qty
-                                    + ")";
-                            ps = con.prepareStatement(s);
-                            ps.execute();
+                            oba.Add_Product();
                             break;
                         case 2:
                             System.out.println("Product list:\n");
@@ -119,7 +98,9 @@ public class Menu {
                         default:
                             System.out.println("Invalid choice!");
                     }
-                } else if (c1 == 2) {
+                } 
+                else if (c1 == 2) {
+                    Customers obc = new Customers();
                     System.out.println("Product list:\n");
                     s = "select product, price, qty FROM Stockings";
                     rs = stmt.executeQuery(s);
@@ -150,26 +131,28 @@ public class Menu {
                             break;
                         }
                         if (Qty > Quantity)
+                        {
                             System.out.println("Exceeded quantity in stock!");
-                        System.out.println("Do you want to order more products: ");
-                        ch = sc.next().charAt(0);
+                            break;
+                        }
                         price = rs.getFloat(2);
                         Tot_Price += price * Qty;
                         System.out.println("Total price: " + Tot_Price);
+                        System.out.println("Do you want to order more products or would you like to check out: ");
+                        ch = sc.next().charAt(0);
                     } while (ch == 'y');
-                    System.out.println("Would you like to check out? ");
-                    ch = sc.next().charAt(0);
 
                     if (ch == 'y') {
                         for (int j = 0; j < i; j += 2) {
                             // inserting the orders product by product
                             s = "insert into orders values(" + orderno + "," + a[j] + ","
-                                    + a[j + 1] + ",add_months(sysdate,1))";
+                                    + a[j + 1] + ",TIMESTAMPADD(MONTH, 2, SYSDATE()))";
                             ps = con.prepareStatement(s);
                             ps.execute();
                             // updating the inventory in the stockings table
                             s = "update stockings set Qty = " + update + " WHERE pid = " + a[j];
                             rs = stmt.executeQuery(s);
+                            
                         }
                         orderno++;
                     }
