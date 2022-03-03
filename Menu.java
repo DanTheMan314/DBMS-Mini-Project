@@ -13,11 +13,12 @@ public class Menu {
 
             // step3 create the statement object
             Statement stmt = con.createStatement();
-            PreparedStatement ps = null;
+            //PreparedStatement ps = null;
 
             Scanner sc = new Scanner(System.in);
             String name;
-            int pid, Qty, orderno = 9001, update, t=0;
+            //int pid, Qty, update, t=0; 
+            int orderno = 9001;
 
             String s = "select oid FROM orders";
             ResultSet rs = stmt.executeQuery(s);
@@ -26,7 +27,7 @@ public class Menu {
             System.out.print(rs.getInt(1));
             System.out.println(" " + orderno + " orderno " + t + " t");
             char ch = 'y';
-            float price = 0, Tot_Price = 0;
+            //float price = 0, Tot_Price = 0;
             do {
                 System.out.print("User choice:\n1.Admin\n2.Customer\nEnter choice: ");
                 int c1 = sc.nextInt();
