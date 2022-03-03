@@ -105,6 +105,7 @@ public class Customers {
                 System.out.println("Total price: " + Tot_Price);
                 System.out.println("Do you want to order more products?");
                 ch = sc.next().charAt(0);
+                name = sc.nextLine();
             } while (ch == 'y');
 
             for (int j = 0; j < i; j += 2) {
