@@ -164,7 +164,7 @@ public class Menu {
                         for (int j = 0; j < i; j += 2) {
 
                             s = "insert into orders values(" + orderno + "," + a[j] + ","
-                                    + a[j + 1] + ",add_months(sysdate,1))";
+                                    + a[j + 1] + ",TIMESTAMPADD(MONTH, 2, SYSDATE()))";
                             ps = con.prepareStatement(s);
                             ps.execute();
                             s = "update stockings set Quantity = " + update + " WHERE pid = " + a[j];
