@@ -120,6 +120,9 @@ public class Admin {
             s = "select pid, product, price, qty FROM Stockings";
             rs = stmt.executeQuery(s);
             System.out.println("Pid\tProduct name\tPrice\tQuantity\n");
+            while (rs.next())
+                System.out.println(rs.getInt(1)+"\t"+rs.getString(2)+"\t"+rs.getInt(3)+"\t"
+                + rs.getInt(4));
             System.out.println("Enter the id of the product: ");
             pid = sc.nextInt();
             System.out.println("OrderID\tQuantity\n");
