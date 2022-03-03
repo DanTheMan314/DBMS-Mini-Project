@@ -4,7 +4,6 @@ import java.sql.*;
 public class Menu {
     public static void main(String args[]) {
         try {
-            int a[] = new int[20],i;
             //step1 load the driver class
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -59,62 +58,7 @@ public class Menu {
                 } 
                 else if (c1 == 2) {
                     Customers obc = new Customers();
-                    System.out.println("Product list:\n");
-                    s = "select product, price, qty FROM Stockings";
-                    rs = stmt.executeQuery(s);
-                    System.out.println("Product name\tPrice\tQuantity\n");
-                    while (rs.next())
-                        System.out.println(rs.getString(1) + "\t" + rs.getFloat(2) + "\t" + rs.getInt(3));
-
-                    for (i = 0; i < 20; i++)
-                        a[i] = 0;
-                    i = 0;
-                    do {
-                        System.out.println("Enter the name of the product: ");
-                        name = sc.nextLine();
-                        name = sc.nextLine();
-                        System.out.println("Quantity to be bought: ");
-                        Qty = sc.nextInt();
-                        s = "select qty,price,pid from Stockings where product = '" + name + "'";
-                        rs = stmt.executeQuery(s);
-                        rs.next();
-                        int Quantity = rs.getInt(1);
-                        pid = rs.getInt(3);
-                        a[i] = pid;
-                        a[i + 1] = Qty;
-                        update = Quantity - a[i + 1];
-                        i += 2;
-                        if (i > 19) {
-                            System.out.println("Exceeded cloud storage");
-                            break;
-                        }
-                        if (Qty > Quantity)
-                        {
-                            System.out.println("Exceeded quantity in stock!");
-                            break;
-                        }
-                        price = rs.getFloat(2);
-                        Tot_Price += price * Qty;
-                        System.out.println("Total price: " + Tot_Price);
-                        System.out.println("Do you want to order more products or would you like to check out: ");
-                        ch = sc.next().charAt(0);
-                    } while (ch == 'y');
-
-                    if (ch == 'y') {
-                        for (int j = 0; j < i; j += 2) {
-                            // inserting the orders product by product
-                            s = "insert into orders values(" + orderno + "," + a[j] + ","
-                                    + a[j + 1] + ",TIMESTAMPADD(MONTH, 2, SYSDATE()))";
-                            ps = con.prepareStatement(s);
-                            ps.execute();
-                            // updating the inventory in the stockings table
-                            s = "update stockings set Qty = " + update + " WHERE pid = " + a[j];
-                            rs = stmt.executeQuery(s);
-                            
-                        }
-                        orderno++;
-                    }
-                    // Set the date of closing as sysdate + random number
+                    obc.Order();
                 }
                 System.out.println("Do you want to continue: ");
                 ch = sc.next().charAt(0);

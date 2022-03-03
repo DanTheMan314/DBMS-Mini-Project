@@ -79,11 +79,11 @@ public class Customers {
                 for (int j = 0; j < i; j += 2) {
                     s = "insert into orders values(" + orderno + "," + a[j] + ","
                         + a[j + 1] + ",TIMESTAMPADD(MONTH, 2, SYSDATE()))";
-                ps = con.prepareStatement(s);
-                ps.execute();
-                s = "update stockings set qty = " + update + " WHERE pid = " + a[j];
-                rs = stmt.executeQuery(s);       
-            }
+                    ps = con.prepareStatement(s);
+                    ps.execute();
+                    s = "update stockings set qty = " + update + " WHERE pid = " + a[j];
+                    rs = stmt.executeQuery(s);       
+                }
             orderno++;
             // Set the date of closing as sysdate + random number
             }
