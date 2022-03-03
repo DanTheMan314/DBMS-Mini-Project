@@ -26,7 +26,7 @@ class Start
             ps = con.prepareStatement(s);
             ps.execute();
             s = "create table Customers( Cid integer primary key"
-            +", CName varchar(20), phoneNo integer, Localty varchar(20))";
+            +", CName varchar(20), phoneNo integer, Locality varchar(20))";
             ps = con.prepareStatement(s);
             ps.execute();
             s = "insert into stockings values(121,'cold coffee',88,10)";
