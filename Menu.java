@@ -153,7 +153,7 @@ public class Menu {
                     ch = sc.next().charAt(0);
 
                     if (ch == 'y') {
-                        for (int j = 0; j <= i; j+=2)
+                        for (int j = 0; j < i; j+=2)
 
                             s = "insert into orders values(" + orderno + "," + a[j] + ","
                                     + a[j+1] + ",add_months(sysdate,1))";
