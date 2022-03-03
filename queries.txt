@@ -5,5 +5,6 @@ Insert into orders values(3,121,100,1,STR_TO_DATE('2013-02-11', '%Y-%m-%d'));
 drop table orders;
 CREATE TABLE ORDERS (Oid integer PRIMARY KEY, Prodid integer, custid integer, qty integer, dateofclosing date);
 
-create table Customers( Cid integer primary key, CName varchar(20), phoneNo integer, Locality varchar(20));
+drop table Customers;
+create table Customers( Cid integer primary key, CName varchar(20), phoneNo bigint, Locality varchar(20));
 insert into customers values(100,'Glu Tton',9873738234,'Florida');
