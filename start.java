@@ -22,19 +22,11 @@ class Start
             ps = con.prepareStatement(s);
             ps.execute();
             s = "CREATE TABLE ORDERS (Oid integer PRIMARY KEY, Prodid"
-<<<<<<< HEAD
-<<<<<<< HEAD
             + " integer, qty integer, dateofclosing date)";
             ps = con.prepareStatement(s);
             ps.execute();
             s = "create table Customers( Cid integer primary key"
             +", CName varchar(20), phoneNo integer, Localty varchar(20))";
-=======
-            + " integer,custid integer, qty integer, dateofclosing date)";
->>>>>>> 61c3d5a3b3746e5314245ecc7431a46bf7e3b0fa
-=======
-            + " integer,custid integer, qty integer, dateofclosing date)";
->>>>>>> 61c3d5a3b3746e5314245ecc7431a46bf7e3b0fa
             ps = con.prepareStatement(s);
             ps.execute();
             s = "insert into stockings values(121,'cold coffee',88,10)";
