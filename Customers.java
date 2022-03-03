@@ -49,6 +49,7 @@ public class Customers {
                 long no = sc.nextLong();
                 System.out.println("Enter your Locality");
                 String loc = sc.nextLine();
+                loc = sc.nextLine();
                 s = "insert into customers values(" + custno + ",'" + cname + "'," + no + ",'"
                         + loc + "',0)";
                 ps = con.prepareStatement(s);
@@ -57,7 +58,7 @@ public class Customers {
             } else {
                 System.out.println("Enter your name");
                 String cname = sc.nextLine();
-                s = "select cid,total FROM Customers where name = " + cname;
+                s = "select cid,total FROM Customers where cname = " + cname;
                 rs = stmt.executeQuery(s);
                 rs.next();
                 custno = rs.getInt(1);

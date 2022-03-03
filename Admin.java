@@ -125,12 +125,12 @@ public class Admin {
                 + rs.getInt(4));
             System.out.println("Enter the id of the product: ");
             pid = sc.nextInt();
-            System.out.println("OrderID\tQuantity\n");
-            s = "select oid,o.qty from stockings s, orders o WHERE s.pid = o.prodid AND s.pid = "
+            System.out.println("OrderID\tQuantity\tCustomer ID\n");
+            s = "select oid,o.qty,custid from stockings s, orders o WHERE s.pid = o.prodid AND s.pid = "
             + pid;
             rs = stmt.executeQuery(s);
             while (rs.next())
-                System.out.println(rs.getInt(1)+"\t"+rs.getInt(2));
+                System.out.println(rs.getInt(1)+"\t"+rs.getInt(2)+"\t"+rs.getInt(3));
             // SELECT OrderID, Qty AS Quantity Ordered FROM Stocking s, Orders o WHERE
             // s.ProductID == o.pid AND s.ProductID == pid AND Date_Of_Closing >= SYSDATE;
         } catch (Exception e) {
