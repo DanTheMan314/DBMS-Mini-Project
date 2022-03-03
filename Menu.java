@@ -33,6 +33,8 @@ public class Menu {
 
             String s = "select oid FROM orders";
             ResultSet rs = stmt.executeQuery(s);
+            if(!rs.next())
+                orderno = 9001;
             while (rs.next())
                 orderno = rs.getInt(1);
             char ch = 'y';
