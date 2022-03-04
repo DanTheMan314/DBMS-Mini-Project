@@ -52,7 +52,7 @@ public class Admin {
             rs = stmt.executeQuery(s);
             System.out.println("Pid\tProduct name\tPrice\tQuantity\n----------------------------------------");
             while (rs.next())
-                System.out.println(rs.getInt(1)+"\t"+rs.getString(2) + "\t" + rs.getFloat(3) 
+                System.out.println(rs.getInt(1)+"\t"+rs.getString(2) + "\t" + rs.getInt(3) 
                 + "\t" + rs.getInt(4));
             System.out.println("Enter the id of the product to be updated: ");
             pid = sc.nextInt();
@@ -74,7 +74,7 @@ public class Admin {
             System.out.println("Pid\tProduct name\tPrice\tQuantity\n----------------------------------------");
             while (rs.next())
                 System.out.println(rs.getInt(1)+"\t"+rs.getString(2) + "\t" + 
-                rs.getFloat(3) + "\t" + rs.getInt(4));
+                rs.getInt(3) + "\t" + rs.getInt(4));
             System.out.println("Enter the id of the product on sale: ");
             pid = sc.nextInt();
             System.out.println("Enter Discount: ");
@@ -84,7 +84,7 @@ public class Admin {
             rs.next();
             price = rs.getInt(1);
             price -= price * (disc / 100);
-            System.out.println("New price: "+price);
+            System.out.println("New price: ");
             s = "update stockings set price = " + price + " WHERE pid = " + pid;
             ps = con.prepareStatement(s);
             ps.execute();
@@ -101,7 +101,7 @@ public class Admin {
             System.out.println("Pid\tProduct name\tPrice\tQuantity\n----------------------------------------");
             while (rs.next())
                 System.out.println(rs.getInt(1)+"\t"+rs.getString(2) + "\t" + 
-                rs.getFloat(3) + "\t" + rs.getInt(4));
+                rs.getInt(3) + "\t" + rs.getInt(4));
             System.out.println("Enter product id to be deleted: ");
             pid = sc.nextInt();
             System.out.println("Product deleted!");

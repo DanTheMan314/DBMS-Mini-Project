@@ -17,7 +17,7 @@ public class Customers {
     String name, s;
     int pid, Qty, orderno = 9001, custno = 000;
     char ch = 'y';
-    float price = 0, Tot_Price = 0, exist_tot = 0,new_tot;
+    int price = 0, Tot_Price = 0, exist_tot = 0,new_tot;
 
     Customers() {
         try {
@@ -74,7 +74,7 @@ public class Customers {
             rs = stmt.executeQuery(s);
             System.out.println("Product name\tPrice\tQuantity\n--------------------------");
             while (rs.next())
-                System.out.println(rs.getString(1) + "\t" + rs.getFloat(2) + "\t" + rs.getInt(3));
+                System.out.println(rs.getString(1) + "\t" + rs.getInt(2) + "\t" + rs.getInt(3));
             for (i = 0; i < 30; i++)
                 a[i] = 0;
             i = 0;
@@ -91,7 +91,7 @@ public class Customers {
                 a[i] = pid;
                 a[i + 1] = Qty;
                 a[i + 2] = Quantity - a[i + 1];
-                i += 2;
+                i += 3;
                 if (i > 29) {
                     System.out.println("Exceeded cloud storage");
                     break;
@@ -100,7 +100,7 @@ public class Customers {
                     System.out.println("Exceeded quantity in stock!");
                     break;
                 }
-                price = rs.getFloat(2);
+                price = rs.getInt(2);
                 Tot_Price += price * Qty;
                 System.out.println("Total price: " + Tot_Price);
                 System.out.println("Do you want to order more products?");
@@ -108,7 +108,7 @@ public class Customers {
                 name = sc.nextLine();
             } while (ch == 'y');
 
-            for (int j = 0; j < i; j += 2) {
+            for (int j = 0; j < i; j += 3) {
                 s = "insert into orders values(" + orderno + "," + a[j] + "," + custno + ","
                         + a[j + 1] + ",SYSDATE())";
                 ps = con.prepareStatement(s);
