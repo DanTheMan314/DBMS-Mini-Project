@@ -7,6 +7,10 @@ CREATE TABLE ORDERS (Oid integer, Prodid integer, custid integer, qty integer, d
 
 drop table Customers;
 create table Customers( Cid integer primary key, CName varchar(20), phoneNo bigint, Locality varchar(20),Total integer);
-insert into customers values(100,'Glu Tton',9873738234,'Florida',0);
+insert into customers values(100,'John',9873738234,'Florida',0);
 
 create table stockings( pid integer primary key, product varchar(20), price integer, qty integer);
+INSERT INTO stockings values(121,'HP Mouse',200,200);
+INSERT INTO stockings values(122,'HP Laptop',90000,200);
+INSERT INTO stockings values(123,'Dell Mouse',400,100);
+INSERT INTO stockings values(124,'Dell Laptop',100000,20);

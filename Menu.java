@@ -17,7 +17,7 @@ public class Menu {
 
             Scanner sc = new Scanner(System.in);
             //int pid, Qty, update, t=0; 
-            char ch = 'y';
+            char ch;
             float price = 0, Tot_Price = 0;
             do {
                 System.out.print("User choice:\n1.Admin\n2.Customer\nEnter choice: ");
@@ -60,6 +60,7 @@ public class Menu {
                 }
                 System.out.println("Do you want to continue: ");
                 ch = sc.next().charAt(0);
+                System.out.println();
             } while (ch == 'y');
             sc.close();
         } catch (Exception e) {

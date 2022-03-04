@@ -72,7 +72,7 @@ public class Customers {
             System.out.println("Product list:\n");
             s = "select product, price, qty FROM Stockings";
             rs = stmt.executeQuery(s);
-            System.out.println("Product name\tPrice\tQuantity\n");
+            System.out.println("Product name\tPrice\tQuantity\n--------------------------");
             while (rs.next())
                 System.out.println(rs.getString(1) + "\t" + rs.getFloat(2) + "\t" + rs.getInt(3));
             for (i = 0; i < 30; i++)

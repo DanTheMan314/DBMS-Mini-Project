@@ -3,7 +3,7 @@ import java.sql.*;
 
 public class Admin {
     int pid, Qty, orderno = 9001, update;
-    float price = 0, Tot_Price = 0;
+    int price = 0, Tot_Price = 0;
     String s, name;
     Scanner sc = new Scanner(System.in);
     Connection con = null;
@@ -32,7 +32,7 @@ public class Admin {
         System.out.println("Product id: ");
         pid = sc.nextInt();
         System.out.println("Price: ");
-        price = sc.nextFloat();
+        price = sc.nextInt();
         System.out.println("Quantity: ");
         Qty = sc.nextInt();
         s = "insert into stockings values(" + pid + ",'" + name + "'," + price + "," + Qty
@@ -50,7 +50,7 @@ public class Admin {
             System.out.println("Product list:\n");
             s = "select pid, product, price, qty FROM Stockings";
             rs = stmt.executeQuery(s);
-            System.out.println("Pid\tProduct name\tPrice\tQuantity\n");
+            System.out.println("Pid\tProduct name\tPrice\tQuantity\n----------------------------------------");
             while (rs.next())
                 System.out.println(rs.getInt(1)+"\t"+rs.getString(2) + "\t" + rs.getFloat(3) 
                 + "\t" + rs.getInt(4));
@@ -71,7 +71,7 @@ public class Admin {
             System.out.println("Product list:\n");
             s = "select pid, product, price, qty FROM Stockings";
             rs = stmt.executeQuery(s);
-            System.out.println("Pid\tProduct name\tPrice\tQuantity\n");
+            System.out.println("Pid\tProduct name\tPrice\tQuantity\n----------------------------------------");
             while (rs.next())
                 System.out.println(rs.getInt(1)+"\t"+rs.getString(2) + "\t" + 
                 rs.getFloat(3) + "\t" + rs.getInt(4));
@@ -82,8 +82,9 @@ public class Admin {
             s = "select price from Stockings where pid = " + pid;
             rs = stmt.executeQuery(s);
             rs.next();
-            price = rs.getFloat(1);
+            price = rs.getInt(1);
             price -= price * (disc / 100);
+            System.out.println("New price: "+price);
             s = "update stockings set price = " + price + " WHERE pid = " + pid;
             ps = con.prepareStatement(s);
             ps.execute();
@@ -97,7 +98,7 @@ public class Admin {
             System.out.println("Product list:\n");
             s = "select pid, product, price, qty FROM Stockings";
             rs = stmt.executeQuery(s);
-            System.out.println("Pid\tProduct name\tPrice\tQuantity\n");
+            System.out.println("Pid\tProduct name\tPrice\tQuantity\n----------------------------------------");
             while (rs.next())
                 System.out.println(rs.getInt(1)+"\t"+rs.getString(2) + "\t" + 
                 rs.getFloat(3) + "\t" + rs.getInt(4));
@@ -118,13 +119,13 @@ public class Admin {
             System.out.println("Product list:\n");
             s = "select pid, product, price, qty FROM Stockings";
             rs = stmt.executeQuery(s);
-            System.out.println("Pid\tProduct name\tPrice\tQuantity\n");
+            System.out.println("Pid\tProduct name\tPrice\tQuantity\n----------------------------------------");
             while (rs.next())
                 System.out.println(rs.getInt(1)+"\t"+rs.getString(2)+"\t"+rs.getInt(3)+"\t"
                 + rs.getInt(4));
             System.out.println("Enter the id of the product: ");
             pid = sc.nextInt();
-            System.out.println("OrderID\tQuantity\tCustomer ID\n");
+            System.out.println("\nOrderID\tQty\tCustomer ID\n--------------------------");
             s = "select oid,o.qty,custid from stockings s, orders o WHERE s.pid = o.prodid AND s.pid = "
             + pid;
             rs = stmt.executeQuery(s);
